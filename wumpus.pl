@@ -1,8 +1,15 @@
+
 % write initial data
-wumpus(1, 3).
-gold(4, 3).
+wumpus(1, 2).
+gold(2, 2).
 agent(1,1,1,1).
-pit(3, 1).%pits should be 5, as mention in book with p = 0.2
+pit(4, 1).
+pit(4,2).
+pit(4,3).
+pit(3,4).
+pit(2,4).
+pit(1,4).
+%%pits should be 5, as mention in book with p = 0.2
 
 %stench by Wumpus
 stench(X,Y):-
@@ -27,37 +34,38 @@ start(Path):-
 
 getAllPaths(L) :-
     agent(X, Y,CR1,CR2),
-    getAllPathsRec(CR1,CR2,X, Y, [],[], L).
+    COUNT is 0,
+    getAllPathsRec(CR1,CR2,X, Y, [],[], L, COUNT).
 
 % Positions, Visited list, and Path list
-getAllPathsRec(_, _, X, Y, _V, NL, L) :-
+getAllPathsRec(_, _, X, Y, _V, NL, L,COUNT) :-
     gold(X, Y),
     reverse(NL,L).
 
 % Positions, Visited list, and Path list
-getAllPathsRec(CR1, CR2,X, Y, V, CL,L) :-
+getAllPathsRec(CR1, CR2,X, Y, V, CL,L,COUNT) :-
     \+member((X, Y,CR1,CR2), V),
-    move(CR1, CR2, X, Y, CL, NX, NY, NL,C1,C2),
+    move(CR1, CR2, X, Y, CL, NX, NY, NL,C1,C2, COUNT, CN),
     
     % No need to use append to build the list of visited nodes
-    getAllPathsRec(C1, C2, NX, NY, [(X,Y,CR1,CR2) | V], NL,L).
+    getAllPathsRec(C1, C2, NX, NY, [(X,Y,CR1,CR2) | V], NL,L, CN) .
 % Up moving
-move(CR1, CR2, X, Y, L, X, NY,NL,C1,C2) :-
-    Y < 5, NY is Y + 1, not(breeze(X,Y)), not(pit(X,Y)), ( CR1 = 1, CR2 = 1,  NL = ['ARROW+Up: '|L],stench(X,Y), not(wumpus(X,Y)),arrow(X,NY,CR1,CR2,C1,C2) 
+move(CR1, CR2, X, Y, L, X, NY,NL,C1,C2,CO,CN) :-
+    Y < 5, NY is Y + 1, not(breeze(X,Y)), not(pit(X,Y)), CN is CO + 1, ( CR1 = 1, CR2 = 1,  NL = ['ARROW+Up: '|L],stench(X,Y), not(wumpus(X,Y)),arrow(X,NY,CR1,CR2,C1,C2) 
                                      ; CR1 = 1, CR2 = 0, not(wumpus(X,Y)), C1 is 1, C2 is 0, NL = ['Up: '|L] ; 
                                       CR1 = 1, CR2 = 1, not(wumpus(X,Y)), NL = ['Up: '|L] , not(stench(X,Y)), C1 is 1, C2 is 1;
                                      CR1 = 0, C1 is 0, C2 is 0, NL = ['Up: '|L] ).
 
 % Right moving
-move(CR1, CR2, X, Y, L, NX, Y,NL,C1, C2) :-
-    X < 5,NX is X + 1, not(breeze(X,Y)),not(pit(X,Y)), ( CR1 = 1, CR2 = 1, stench(X,Y),NL =  ['ARROW+Right: '|L],not(wumpus(X,Y)), arrow(NX,Y,CR1,CR2,C1,C2) 
+move(CR1, CR2, X, Y, L, NX, Y,NL,C1, C2, CO, CN) :-
+    X < 5,NX is X + 1, not(breeze(X,Y)),not(pit(X,Y)), CN is CO + 1,( CR1 = 1, CR2 = 1, stench(X,Y),NL =  ['ARROW+Right: '|L],not(wumpus(X,Y)), arrow(NX,Y,CR1,CR2,C1,C2) 
                                      ; CR1 = 1, CR2 = 0, not(wumpus(X,Y)), NL =  ['Right: '|L] , C1 is 1, C2 is 0; 
                                       CR1 = 1, CR2 = 1, not(wumpus(X,Y)), not(stench(X,Y)), NL = ['Right: '|L], C1 is 1, C2 is 1;
                                      CR1 = 0, C1 is 0, C2 is 0, NL = ['Right: '|L]).
 
 % Down moving
-move(CR1, CR2, X, Y, L, X, NY, NL ,C1,C2) :-
-    Y > 1, NY is Y - 1,not(breeze(X,Y)),not(pit(X,Y)), ( CR1 = 1, CR2 = 1, stench(X,Y), NL = ['ARROW+Down: '|L], not(wumpus(X,Y)), arrow(X,NY,CR1,CR2,C1,C2) 
+move(CR1, CR2, X, Y, L, X, NY, NL ,C1,C2, CO, CN) :-
+    Y > 1, NY is Y - 1,not(breeze(X,Y)),not(pit(X,Y)), CN is CO + 1,( CR1 = 1, CR2 = 1, stench(X,Y), NL = ['ARROW+Down: '|L], not(wumpus(X,Y)), arrow(X,NY,CR1,CR2,C1,C2) 
                                      ; CR1 = 1, CR2 = 0, not(wumpus(X,Y)),NL = ['Down: '|L], C1 is 1, C2 is 0; 
                                       CR1 = 1, CR2 = 1, not(wumpus(X,Y)),NL = ['Down: '|L], not(stench(X,Y)), C1 is 1, C2 is 1;
                                      CR1 = 0, C1 is 0, C2 is 0, NL = ['Down: '|L]).
@@ -65,8 +73,8 @@ move(CR1, CR2, X, Y, L, X, NY, NL ,C1,C2) :-
 
 
 % Left moving
-move(CR1, CR2, X, Y, L, NX, Y,NL,C1,C2) :-
-    X > 1,NX is X - 1, not(breeze(X,Y)), not(pit(X,Y)),  ( CR1 = 1, CR2 = 1, stench(X,Y),NL = ['ARROW+Left: '|L], not(wumpus(X,Y)), arrow(NX,Y,CR1,CR2,C1,C2) 
+move(CR1, CR2, X, Y, L, NX, Y,NL,C1,C2,CO, CN) :-
+    X > 1,NX is X - 1, not(breeze(X,Y)), not(pit(X,Y)),CN is CO + 1,  ( CR1 = 1, CR2 = 1, stench(X,Y),NL = ['ARROW+Left: '|L], not(wumpus(X,Y)), arrow(NX,Y,CR1,CR2,C1,C2) 
                                      ; CR1 = 1, CR2 = 0, not(wumpus(X,Y)),NL =  ['Left: '|L], C1 is 1, C2 is 0; 
                                       CR1 = 1, CR2 = 1, not(wumpus(X,Y)), NL =  ['Left: '|L],not(stench(X,Y)), C1 is 1, C2 is 1 ;
                                      CR1 = 0, C1 is 0, C2 is 0,NL = ['Left: '|L]).
