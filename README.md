@@ -40,3 +40,10 @@
 | 2 | wumpus  | gold| breeze|   pit |  -  |
 | 1 | agent | -  | breeze  |  pit |  -  |
 | 0 | 1     | 2   |  3   |  4  |  5 |
+* in this case we have 2 possible solutions:
+Path = ['ARROW+Up: ', 'Right: ']
+Path = ['ARROW+Right: ', 'Up: ']
+false
+
+* we can see, that to go Up agent use Arrow, so killing wumpus to go up.
+* also this problem solvable( exist at least 2 ways to gold, we do not include paths with breeze ).
