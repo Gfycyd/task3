@@ -10,6 +10,7 @@
 # example of unsolvable problem(exist paths)
 
 | 5 |       |     |      |     |    |
+| ::| :---: | :--:| :--: | :-: | :-:|
 | 4 | pit   |     |      |     |    |
 | 3 | pit   |     |      |     |    |
 | 2 | pit   | gold|wumpus|     |    |
