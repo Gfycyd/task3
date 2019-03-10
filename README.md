@@ -7,12 +7,9 @@
 - If stench and exist arrow, agent pull arrow in direction in which he want to go
 - If miss, no other opportunity to pull arrow(monitoring by 2 criteria, CR1 and CR2)
 
+#TO START THIS GAME YOU NEED TO WRITE  ##Start(Path)
+
 # example of unsolvable problem(exist paths)
-| Left-Aligned  | Center Aligned  | Right Aligned |
-| :------------ |:---------------:| -----:|
-| col 3 is      | some wordy text | $1600 |
-| col 2 is      | centered        |   $12 |
-| zebra stripes | are neat        |    $1 |
 
 | 5 |  -    |  -  |  -   |  -  | -  |
 | :-| :---: | :--:| :---: | :----: | ----:|
