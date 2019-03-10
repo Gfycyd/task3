@@ -1,4 +1,4 @@
-# task3
+# Task3
 ## My implementation of Wumpus
 
 
