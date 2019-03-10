@@ -18,3 +18,15 @@
 | 2 | pit   | gold|wumpus|   -  |  -  |
 | 1 | agent | pit | pit  |  -   |  -  |
 | 0 | 1     | 2   |  3   |  4  |  5 |
+ * no possibility of acting as exist pit around agent(
+ 
+ # similar effect we can see if we will have 
+ | 5 |  -    |  -  |  -   |  -  | -  |
+| :-| :---: | :--:| :---: | :----: | ----:|
+| 4 | pit   |  -   |   -   |  -   |  -  |
+| 3 | pit   |   -  |   -   |    - |  -  |
+| 2 |  breeze| gold|wumpus|   -  |  -  |
+| 1 | agent | breeze | pit  |  -   |  -  |
+| 0 | 1     | 2   |  3   |  4  |  5 |
+* by rules we can not do risk steps so agent never can move to gold, try avoid risk.
+* But this problem can begin solvable, if we omit breeze on code.
