@@ -1,5 +1,5 @@
 # task3
-## My implementation of wumpus
+## My implementation of Wumpus
 
 
 ## A few things, you need to know, before run code:
@@ -9,7 +9,7 @@
 
 ### TO START THIS GAME YOU NEED TO WRITE QUERY ?- Start(Path)
 
-# example of unsolvable problem(exist paths)
+# Example of unsolvable problem(exist paths):
 
 | 5 |  -    |  -  |  -   |  -  | -  |
 | :-| :---: | :--:| :---: | :----: | ----:|
@@ -20,7 +20,7 @@
 | 0 | 1     | 2   |  3   |  4  |  5 |
  * no possibility of acting as exist pit around agent(
  
- # similar effect we can see if we will have 
+ # similar effect we can see if we will have:
  | 5 |  -    |  -  |  -   |  -  | -  |
 | :-| :---: | :--:| :---: | :----: | ----:|
 | 4 | pit   |  -   |   -   |  -   |  -  |
@@ -30,3 +30,13 @@
 | 0 | 1     | 2   |  3   |  4  |  5 |
 * by rules we can not do risk steps so agent never can move to gold, try avoid risk.
 * But this problem can begin solvable, if we omit breeze on code.
+
+# Example of solvable problem( with killing wumpus paths):
+
+| 5 |  -    |  -  |  -   |  -  | -  |
+| :-| :---: | :--:| :---: | :----: | ----:|
+| 4 | pit   |  pit  |   pit |  -   |  -  |
+| 3 | breeze   |   breeze |   breeze  |    - |  -  |
+| 2 | wumpus  | gold| breeze|   pit |  -  |
+| 1 | agent | -  | breeze  |  pit |  -  |
+| 0 | 1     | 2   |  3   |  4  |  5 |
