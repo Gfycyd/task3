@@ -18,7 +18,8 @@
 | 2 | pit   | gold|wumpus|   -  |  -  |
 | 1 | agent | pit | pit  |  -   |  -  |
 | 0 | 1     | 2   |  3   |  4  |  5 |
- * no possibility of acting as exist pit around agent(
+ * no possibility of acting as exist pit around agent
+ * you can not solve when before you and gold pits, or wumpus and you have not arrows.
  
  # similar effect we can see if we will have:
  | 5 |  -    |  -  |  -   |  -  | -  |
