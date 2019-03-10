@@ -7,8 +7,11 @@
 - If stench and exist arrow, agent pull arrow in direction in which he want to go
 - If miss, no other opportunity to pull arrow(monitoring by 2 criteria, CR1 and CR2)
 
-# example of solvable problem(exist paths)
+# example of unsolvable problem(exist paths)
 
-| Attempt | #1  | #2  |
-| :---:   | :-: | :-: |
-| Seconds | 301 | 283 |
+| 5 |       |     |      |     |    |
+| 4 | pit   |     |      |     |    |
+| 3 | pit   |     |      |     |    |
+| 2 | pit   | gold|wumpus|     |    |
+| 1 | agent | pit | pit  |     |    |
+| 0 | 1     | 2   |  3   |  4  |  5 |
