@@ -6,6 +6,8 @@
 - If on this blank: breeze, agent doesn't go, try to not risk(but it is easy to correct, so this code just ignore breeze)
 - If stench and exist arrow, agent pull arrow in direction in which he want to go
 - If miss, no other opportunity to pull arrow(monitoring by 2 criteria, CR1 and CR2)
+- You go to gold
+- You are killed when you on pit on with wumpus in one blank
 
 ### TO START THIS GAME YOU NEED TO WRITE QUERY ?- Start(Path)
 
@@ -21,7 +23,7 @@
  * no possibility of acting as exist pit around agent
  * you can not solve when before you and gold pits, or wumpus and you have not arrows.
  
- # similar effect we can see if we will have:
+ # Similar effect we can see if we will have:
  | 5 |  -    |  -  |  -   |  -  | -  |
 | :-| :---: | :--:| :---: | :----: | ----:|
 | 4 | pit   |  -   |   -   |  -   |  -  |
